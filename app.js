@@ -23,18 +23,15 @@ const parseCSVtoTable = (rawString) => {
   });
 }
 
-const makeShowOptions = (display) => (data) => {
+const makeShowOptions = (selectMenu) => (data) => {
   data[0].forEach((name, i) => {
-    const nameOption = document.createElement('div');
-    nameOption.innerHTML = `
-    <input type="checkbox" id="${name}">
-    <label title="${data[1][i]}" for="${name}">${name}</label>
+    selectMenu.innerHTML += `
+    <option title="${data[1][i]}" value="${name}">${name}</label>
     `
-    display.appendChild(nameOption);
-  });
+    });
 };
 
-const showOptions = makeShowOptions(document.querySelector('.options'));
+const showOptions = makeShowOptions(document.querySelector('select#subject'));
 
 const dataUpload = document.querySelector('#upload');
 const analyzeBtn = document.querySelector('#analyze');
