@@ -16,20 +16,26 @@
     <section class="upload">
         <h2>Step 1</h2>
         <p>Upload the image file that was the background for the 'heatmap'.</p>
-        <label for="upload">Upload File</label>
-        <input id="upload" type="file">
+        <label for="uploadImg">Upload File</label>
+        <input id="uploadImg" accept="image/*" type="file">
+        <img id="source-img" src="" alt="Hidden sourec image for canvas">
 
         <h2>Step 2</h2>
+        <p>Upload the data file.</p>
+        <label for="uploadData">Upload File</label>
+        <input id="uploadData" accept=".csv" type="file">
+
+        <h2>Step 3</h2>
         <p>Please select the variable containing the subject ids.</h4>
         <select name="subject" id="subject">
             <option value="-">-</option>
         </select>
 
-        <h2>Step 3</h2>
+        <h2>Step 4</h2>
         <p>Enter the variable name for the map data e.g. 'U501'</p>
         <input type="text" placeholder="Map data variable name" name="data">
 
-        <h2>Step 4</h2>
+        <h2>Step 5</h2>
         <input id="analyze" type="button" name="Analyze" value="Analyze">
     </section>
 

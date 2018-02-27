@@ -33,7 +33,8 @@ const makeShowOptions = (selectMenu) => (data) => {
 
 const showOptions = makeShowOptions(document.querySelector('select#subject'));
 
-const dataUpload = document.querySelector('#upload');
+const imgUpload = document.querySelector('#uploadImg');
+const dataUpload = document.querySelector('#uploadData');
 const analyzeBtn = document.querySelector('#analyze');
 let data;
 
@@ -55,12 +56,19 @@ dataUpload.addEventListener('change', (e) => {
     })
 })
 
+imgUpload.addEventListener('change', (e) => {
+  document.querySelector('#source-img').src = URL.createObjectURL(e.target.files[0]);
+})
+
 analyzeBtn.addEventListener('click', () => {
   const dataVarName = document.querySelector('input[name="data"]').value;
   const select = document.querySelector('#subject');
   const idVarName = select.options[select.selectedIndex].value;
+  const resultsDisplay = document.querySelector('#results');
 
-  document.querySelector('#results').innerHTML ='';
+  while(resultsDisplay.firstChild) {
+    resultsDisplay.removeChild(resultsDisplay.firstChild);
+  }
 
   const dataIndices = data[0].reduce((indices, name, i) => {
     const match = name.match(dataVarName);
@@ -157,8 +165,7 @@ analyzeBtn.addEventListener('click', () => {
     })
   }
 
-  const makeMap = makeMapMaker(document.querySelector('#source-img'), document.querySelector('#results'));
-
+  const makeMap = makeMapMaker(document.querySelector('#source-img'), resultsDisplay);
 
   reducedTable.forEach((row, i) => {
     makeMap(labelArray[i][0], row);
