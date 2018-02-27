@@ -1,3 +1,9 @@
+// const State = (function(){
+//   let state = {
+
+//   }
+// })();
+
 const parseFile = (file) => {
   return new Promise((resolve, reject) => {
     let reader = new FileReader();
@@ -18,8 +24,8 @@ const parseCSVtoTable = (rawString) => {
   const csvString = rawString.replace(/\"/g, '')
   const rows = csvString.split(/\r\n/);
   return table = rows.map((row, i) => {
-    // description row contains commas in items and needs to be handled with positive lookahead
-    return i !== 1 ? row.split(',') : row.split(/,(?=\S)/);
+    // description row contains sentences with commas so we need a negative lookahead
+    return row.split(/,(?!\s)/);
   });
 }
 
@@ -37,6 +43,15 @@ const dataUpload = document.querySelector('#upload');
 const analyzeBtn = document.querySelector('#analyze');
 let data;
 
+if(dataUpload.files[0]) {
+  parseFile(dataUpload.files[0])
+  .then(result => parseCSVtoTable(result))
+  .then(table => {
+    data = table;
+    showOptions(data);
+  })
+}
+
 dataUpload.addEventListener('change', (e) => {
   parseFile(e.target.files[0])
     .then(result => parseCSVtoTable(result))
@@ -47,16 +62,19 @@ dataUpload.addEventListener('change', (e) => {
 })
 
 analyzeBtn.addEventListener('click', () => {
-  const varName = document.querySelector('input[name="data"]').value;
-  console.log(varName);
+  const dataVarName = document.querySelector('input[name="data"]').value;
+  const select = document.querySelector('#subject');
+  const idVarName = select.options[select.selectedIndex].value;
 
-  const relevantIndices = data[0].reduce((indices, name, i) => {
-    const match = name.match(varName);
+  const dataIndices = data[0].reduce((indices, name, i) => {
+    const match = name.match(dataVarName);
     if(match !== null){
       indices.push(i);
     }
     return indices;
   }, []);
+
+  const idIndex = data[0].findIndex(name => name === idVarName);
 
   const selectColumns = (table, indices, header) => {
     const rows = table.slice(header ? 0 : 2);
@@ -69,10 +87,10 @@ analyzeBtn.addEventListener('click', () => {
     })
   }
 
-  const reducedTable = selectColumns(data, relevantIndices, false);
+  const reducedTable = selectColumns(data, dataIndices, false);
+  const labelArray = selectColumns(data, [idIndex], false);
 
-  const makeMapMaker = (bgImage, resultContainer) => (row) => {
-    console.log(row);
+  const makeMapMaker = (bgImage, resultContainer) => (label, row) => {
     const canvas = document.createElement("canvas");
     canvas.width = 1200;
     canvas.height = 900;
@@ -108,14 +126,41 @@ analyzeBtn.addEventListener('click', () => {
       ctx.fillText(r, scaledX[k] * canvas.width - 4, scaledY[k] * canvas.height + 8);
     }
 
-    resultContainer.appendChild(canvas);
+    const createUrlfromCanvas = (canvas) => {
+      return new Promise((resolve, reject) => {
+        canvas.toBlob(blob => {
+          resolve(URL.createObjectURL(blob));
+        }, 'image/png');
+      }); 
+    }
+
+    createUrlfromCanvas(canvas)
+    .then(url => {
+      const labelInfo = document.createElement('p');
+      labelInfo.innerText = label;
+      resultContainer.appendChild(labelInfo);
+      
+      const img = document.createElement('img');
+      img.setAttribute('width','400');
+      img.setAttribute('height','300');
+      img.setAttribute('src',url);
+
+      const link = document.createElement('a');
+      link.setAttribute('href', url);
+      link.setAttribute('download', `${label}.png`);
+      link.setAttribute('type','image/png'); 
+
+      link.appendChild(img);
+      
+      resultContainer.appendChild(link);
+    })
   }
 
   const makeMap = makeMapMaker(document.querySelector('#source-img'), document.querySelector('#results'));
 
 
-  reducedTable.forEach((row) => {
-    makeMap(row);
+  reducedTable.forEach((row, i) => {
+    makeMap(labelArray[i][0], row);
   });
 });
 
