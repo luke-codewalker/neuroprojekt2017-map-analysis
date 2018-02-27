@@ -15,12 +15,11 @@
     <section class="upload">
         <img id="source-img" src="test-map.png">
         <input id="upload" type="file" name="" value="">
-        <h4>Please select the variables containing the size and the coordinates</h4>
-        <div class="options">
-            <select name="subject" id="subject">
-                <option value="-" selected>-</option>
-            </select>
-        </div>
+        <h4>Please select the variables containing the subject and enter the variable name for the map data e.g. 'U501'</h4>
+        <select name="subject" id="subject">
+            <option value="-" selected>-</option>
+        </select>
+        <input type="text" placeholder="Map data variable name" name="data">
         <input id="analyze" type="button" name="Analyze" value="Analyze">
     </section>
 

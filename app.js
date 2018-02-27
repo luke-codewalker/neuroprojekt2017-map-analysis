@@ -47,10 +47,12 @@ dataUpload.addEventListener('change', (e) => {
 })
 
 analyzeBtn.addEventListener('click', () => {
-  const checkedList = Array.from(document.querySelectorAll('.options input:checked'));
-  const checkedVarNames = checkedList.map(input => input.id);
-  const relevantIndices = data[0].reduce((indices, varName, i) => {
-    if (checkedVarNames.find(name => name === varName)) {
+  const varName = document.querySelector('input[name="data"]').value;
+  console.log(varName);
+
+  const relevantIndices = data[0].reduce((indices, name, i) => {
+    const match = name.match(varName);
+    if(match !== null){
       indices.push(i);
     }
     return indices;
