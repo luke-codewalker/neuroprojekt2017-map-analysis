@@ -1,9 +1,3 @@
-// const State = (function(){
-//   let state = {
-
-//   }
-// })();
-
 const parseFile = (file) => {
   return new Promise((resolve, reject) => {
     let reader = new FileReader();
@@ -65,6 +59,8 @@ analyzeBtn.addEventListener('click', () => {
   const dataVarName = document.querySelector('input[name="data"]').value;
   const select = document.querySelector('#subject');
   const idVarName = select.options[select.selectedIndex].value;
+
+  document.querySelector('#results').innerHTML ='';
 
   const dataIndices = data[0].reduce((indices, name, i) => {
     const match = name.match(dataVarName);
@@ -136,23 +132,28 @@ analyzeBtn.addEventListener('click', () => {
 
     createUrlfromCanvas(canvas)
     .then(url => {
-      const labelInfo = document.createElement('p');
+      const result = document.createElement('div');
+      result.classList.add('result');
+
+      const labelInfo = document.createElement('span');
       labelInfo.innerText = label;
-      resultContainer.appendChild(labelInfo);
+      result.appendChild(labelInfo);
       
       const img = document.createElement('img');
-      img.setAttribute('width','400');
-      img.setAttribute('height','300');
+      img.setAttribute('width','120');
+      img.setAttribute('height','90');
       img.setAttribute('src',url);
 
       const link = document.createElement('a');
       link.setAttribute('href', url);
       link.setAttribute('download', `${label}.png`);
       link.setAttribute('type','image/png'); 
+      link.innerText = 'Download';
 
-      link.appendChild(img);
-      
-      resultContainer.appendChild(link);
+      result.appendChild(img);
+      result.appendChild(link);
+
+      resultContainer.appendChild(result);
     })
   }
 
