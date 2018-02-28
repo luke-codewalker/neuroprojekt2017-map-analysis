@@ -1,7 +1,6 @@
 * {
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
 }
 
 :root {
@@ -27,37 +26,6 @@ body {
 
 canvas{
  border: 1px solid black;
-}
-
-.options {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-}
-
-.options input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-}
-
-.options input:checked + label {
-    border: 1px solid #004c10;
-    background-color: #009920;
-    color: #fff;
-}
-
-.options label {
-    cursor: pointer;
-    display: inline-block;
-    z-index: 1;
-
-    padding: 0.25em;
-    margin: 0.125em;
-
-    border: 1px solid #333;
-    background-color: #dfdfdf;
-    border-radius: 3px;
 }
 
 main {
