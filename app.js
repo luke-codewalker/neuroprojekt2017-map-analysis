@@ -27,7 +27,7 @@ const makeShowOptions = (selectMenu) => (data) => {
   while(selectMenu.firstChild) {
     selectMenu.removeChild(selectMenu.firstChild);
   }
-  
+
   data[0].forEach((name, i) => {
     selectMenu.innerHTML += `
     <option value="${name}">${name}</label>
@@ -85,20 +85,22 @@ analyzeBtn.addEventListener('click', () => {
 
   const idIndex = data[0].findIndex(name => name === idVarName);
 
-  const selectColumns = (table, indices, secondHeader) => {
-    const rows = table.slice(secondHeader ? 2 : 1);
+  const selectColumns = (table, indices, startRow) => {
+    const rows = table.slice(startRow);
+
     return rows.map((row, i) => {
       return row.filter((val, i) => {
-        if (indices.find(index => index === i)) {
+        if (undefined !== indices.find(index => index === i)) {
           return val;
         }
       })
     })
   }
 
-  const reducedTable = selectColumns(data, dataIndices, secondHeader);
-  const labelArray = selectColumns(data, [idIndex], secondHeader);
+  const reducedTable = selectColumns(data, dataIndices, secondHeader ? 2 : 1);
+  const labelArray = selectColumns(data, [idIndex], secondHeader ? 2 : 1);
 
+  console.log(labelArray);
   const makeMapMaker = (bgImage, resultContainer) => (label, row) => {
     const canvas = document.createElement("canvas");
     canvas.width = 1200;
