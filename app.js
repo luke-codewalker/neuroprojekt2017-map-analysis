@@ -24,6 +24,10 @@ const parseCSVtoTable = (rawString) => {
 }
 
 const makeShowOptions = (selectMenu) => (data) => {
+  while(selectMenu.firstChild) {
+    selectMenu.removeChild(selectMenu.firstChild);
+  }
+  
   data[0].forEach((name, i) => {
     selectMenu.innerHTML += `
     <option value="${name}">${name}</label>
