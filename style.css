@@ -104,7 +104,7 @@ input[type="file"] {
     display: none;
 }
 
-.result a, label, input[type="button"] {
+.result a, .btn-label, input[type="button"] {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 1rem;
     color: #fff;
