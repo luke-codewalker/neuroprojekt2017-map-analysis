@@ -60,6 +60,10 @@ dataUpload.addEventListener('change', (e) => {
     })
 })
 
+if(imgUpload.files[0]) {
+  document.querySelector('#source-img').src = URL.createObjectURL(imgUpload.files[0]);
+}
+
 imgUpload.addEventListener('change', (e) => {
   document.querySelector('#source-img').src = URL.createObjectURL(e.target.files[0]);
 })
