@@ -26,7 +26,7 @@ const parseCSVtoTable = (rawString) => {
 const makeShowOptions = (selectMenu) => (data) => {
   data[0].forEach((name, i) => {
     selectMenu.innerHTML += `
-    <option title="${data[1][i]}" value="${name}">${name}</label>
+    <option value="${name}">${name}</label>
     `
     });
 };
@@ -61,6 +61,7 @@ imgUpload.addEventListener('change', (e) => {
 })
 
 analyzeBtn.addEventListener('click', () => {
+  const secondHeader = document.querySelector('#secondHeaderCheck:checked') !== null;
   const dataVarName = document.querySelector('input[name="data"]').value;
   const select = document.querySelector('#subject');
   const idVarName = select.options[select.selectedIndex].value;
@@ -80,8 +81,8 @@ analyzeBtn.addEventListener('click', () => {
 
   const idIndex = data[0].findIndex(name => name === idVarName);
 
-  const selectColumns = (table, indices, header) => {
-    const rows = table.slice(header ? 0 : 2);
+  const selectColumns = (table, indices, secondHeader) => {
+    const rows = table.slice(secondHeader ? 2 : 1);
     return rows.map((row, i) => {
       return row.filter((val, i) => {
         if (indices.find(index => index === i)) {
@@ -91,8 +92,8 @@ analyzeBtn.addEventListener('click', () => {
     })
   }
 
-  const reducedTable = selectColumns(data, dataIndices, false);
-  const labelArray = selectColumns(data, [idIndex], false);
+  const reducedTable = selectColumns(data, dataIndices, secondHeader);
+  const labelArray = selectColumns(data, [idIndex], secondHeader);
 
   const makeMapMaker = (bgImage, resultContainer) => (label, row) => {
     const canvas = document.createElement("canvas");

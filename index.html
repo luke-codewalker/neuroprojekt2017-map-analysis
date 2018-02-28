@@ -13,33 +13,39 @@
 <body>
     <main>
     <h1>Map data visualization</h1>
-    <section class="upload">
-        <h2>Step 1</h2>
+    <section class="menu">
+        <h2>Step 1 <span class="heading-addition">Load image</span></h2>
         <p>Upload the image file that was the background for the 'heatmap'.</p>
         <label class="btn-label" for="uploadImg">Upload File</label>
         <input id="uploadImg" accept="image/*" type="file">
         <img id="source-img" src="" alt="Hidden sourec image for canvas">
-
-        <h2>Step 2</h2>
-        <p>Upload the data file.</p>
+    </section>
+    <section class="menu">
+        <h2>Step 2 <span class="heading-addition">Load data</span></h2>
+        <p>Upload the data file. Make sure values are separated by commas and cases by new lines.</p>
         <label class="btn-label" for="uploadData">Upload File</label>
         <input id="uploadData" accept=".csv" type="file">
-
-        <h2>Step 3</h2>
+    </section>
+    <section class="menu">
+        <h2>Step 3 <span class="heading-addition">Select identifier</span></h2>
         <p>Please select the variable containing the subject ids.</h4>
         <select name="subject" id="subject">
             <option value="-">-</option>
         </select>
-
-        <h2>Step 4</h2>
+    </section>
+    <section class="menu">
+        <h2>Step 4 <span class="heading-addition">Set data variable</span></h2>
         <p>Enter the variable name for the map data e.g. 'U501'</p>
         <input type="text" placeholder="Map data variable name" name="data">
-
-        <h2>Step 5</h2>
+    </section>
+    <section class="menu">
+        <h2>Step 5 <span class="heading-addition">Vizualize the maps</span></h2>
         <p>Does your data file contain the variable descriptions in the second row?</p>
-        <input id="secondHeaderCheck" type="checkbox" value="secondHeader">
-        <label for="secondHeaderCheck">Data contains second header row</label>
-        <input id="analyze" type="button" name="Analyze" value="Analyze">
+        <p>
+            <input id="secondHeaderCheck" type="checkbox" value="secondHeader">
+            <label for="secondHeaderCheck">Data contains second header row</label>
+        </p>
+        <input id="analyze" type="button" value="Visualize">
     </section>
 
     <section class="visualizations">
