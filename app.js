@@ -99,8 +99,7 @@ analyzeBtn.addEventListener('click', () => {
 
   const reducedTable = selectColumns(data, dataIndices, secondHeader ? 2 : 1);
   const labelArray = selectColumns(data, [idIndex], secondHeader ? 2 : 1);
-
-  console.log(labelArray);
+  
   const makeMapMaker = (bgImage, resultContainer) => (label, row) => {
     const canvas = document.createElement("canvas");
     canvas.width = 1200;
