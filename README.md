@@ -5,7 +5,7 @@ Repo for https://luke-codewalker.github.io/neuroprojekt2017-map-analysis/.
 ## TODO :sweat_smile:
 - [x] implement functionality
 - [x] add styles
-- [ ] add error checking and messages 
+- [x] add error checking and messages 
 - [x] add optional header control
 - [ ] extend readme
 - [ ] clean up code
