@@ -9,6 +9,7 @@ Repo for https://luke-codewalker.github.io/neuroprojekt2017-map-analysis/.
 - [x] add optional header control
 - [ ] extend readme
 - [ ] clean up code
+- [ ] add preview feature
 
 
 ### Expected data format
