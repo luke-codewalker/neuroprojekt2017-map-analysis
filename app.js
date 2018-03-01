@@ -39,7 +39,7 @@ const showOptions = makeShowOptions(document.querySelector('select#subject'));
 
 const imgUpload = document.querySelector('#uploadImg');
 const dataUpload = document.querySelector('#uploadData');
-const analyzeBtn = document.querySelector('#analyze');
+const analyzeForm = document.querySelector('form');
 let data;
 
 if(dataUpload.files[0]) {
@@ -72,7 +72,9 @@ imgUpload.addEventListener('change', (e) => {
   document.querySelector('#source-img').src = URL.createObjectURL(e.target.files[0]);
 })
 
-analyzeBtn.addEventListener('click', () => {
+analyzeForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
   const secondHeader = document.querySelector('#secondHeaderCheck:checked') !== null;
   const dataVarName = document.querySelector('input[name="data"]').value;
   const select = document.querySelector('#subject');

@@ -68,11 +68,19 @@ main {
     margin: 0.5rem;
 }
 
-input[type="file"] {
-    display: none;
+.file-input-wrapper {
+    position: relative;
 }
 
-.result a, .btn-label, input[type="button"] {
+input[type="file"] {
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+    position: absolute;
+    top: 0;
+}
+
+.result a, .btn-label, input[type="submit"] {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 1rem;
     color: #fff;
@@ -90,8 +98,13 @@ select, input[type="text"] {
     padding: 0.25rem 0.5rem;
 }
 
-.menu {
+select {
+    width: 7rem;
+}
+
+fieldset {
     padding-bottom: 2rem;
+    border: none;
     border-bottom: 1px solid #aaa;
 }
 
