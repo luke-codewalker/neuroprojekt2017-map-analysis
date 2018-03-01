@@ -43,6 +43,7 @@ const analyzeBtn = document.querySelector('#analyze');
 let data;
 
 if(dataUpload.files[0]) {
+  document.querySelector('#dataFileName').innerText = dataUpload.files[0].name;
   parseFile(dataUpload.files[0])
   .then(result => parseCSVtoTable(result))
   .then(table => {
@@ -52,6 +53,7 @@ if(dataUpload.files[0]) {
 }
 
 dataUpload.addEventListener('change', (e) => {
+  document.querySelector('#dataFileName').innerText = e.target.files[0].name;
   parseFile(e.target.files[0])
     .then(result => parseCSVtoTable(result))
     .then(table => {
@@ -61,10 +63,12 @@ dataUpload.addEventListener('change', (e) => {
 })
 
 if(imgUpload.files[0]) {
+  document.querySelector('#imgFileName').innerText = imgUpload.files[0].name;  
   document.querySelector('#source-img').src = URL.createObjectURL(imgUpload.files[0]);
 }
 
 imgUpload.addEventListener('change', (e) => {
+  document.querySelector('#imgFileName').innerText = e.target.files[0].name;    
   document.querySelector('#source-img').src = URL.createObjectURL(e.target.files[0]);
 })
 

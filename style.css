@@ -114,3 +114,16 @@ footer a, footer a:visited {
     color: #aaa;
     font-weight: 400;
 }
+
+.file-name {
+    color: #aaa;
+    padding: 0 1rem;
+}
+
+.file-name::before {
+    content: '< ';
+}
+
+.file-name::after {
+    content: ' >';
+}

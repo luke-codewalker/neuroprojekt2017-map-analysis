@@ -17,13 +17,13 @@
         <h2>Step 1 <span class="heading-addition">Load image</span></h2>
         <p>Upload the image file that was the background for the 'heatmap'.</p>
         <label class="btn-label" for="uploadImg">Upload File</label>
-        <input id="uploadImg" accept="image/*" type="file">
+        <input id="uploadImg" accept="image/*" type="file"><span id="imgFileName" class="file-name"></span>
         <img id="source-img" src="" alt="Hidden sourec image for canvas">
     </section>
     <section class="menu">
         <h2>Step 2 <span class="heading-addition">Load data</span></h2>
         <p>Upload the data file. Make sure values are separated by commas and cases by new lines.</p>
-        <label class="btn-label" for="uploadData">Upload File</label>
+        <label class="btn-label" for="uploadData">Upload File</label><span id="dataFileName" class="file-name"></span>
         <input id="uploadData" accept=".csv" type="file">
     </section>
     <section class="menu">
